@@ -4,13 +4,16 @@ class Solution:
     #Function to sort the array using bubble sort algorithm.
     def bubbleSort(self,arr, n):
         # code here
-        for time in range(n):
-            for x in range(len(arr)-1-time):
-               if arr[x+1]<arr[x]:
-                   temp = arr[x]
-                   arr[x] = arr[x+1]
-                   arr[x+1] = temp
-
+        for i in range(n):
+            swap = 0
+            for x in range(n-i-1):
+                if arr[x]>arr[x+1]:
+                    temp = arr[x]
+                    arr[x] = arr[x+1]
+                    arr[x+1] = temp
+                    swap = 1
+            if swap == 0:
+                break
 
 #{ 
  # Driver Code Starts
