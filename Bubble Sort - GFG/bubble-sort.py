@@ -5,7 +5,7 @@ class Solution:
     def bubbleSort(self,arr, n):
         # code here
         for time in range(n):
-            for x in range(len(arr)-1):
+            for x in range(len(arr)-1-time):
                if arr[x+1]<arr[x]:
                    temp = arr[x]
                    arr[x] = arr[x+1]
