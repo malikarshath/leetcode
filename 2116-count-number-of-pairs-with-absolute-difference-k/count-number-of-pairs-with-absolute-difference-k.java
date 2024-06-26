@@ -4,9 +4,12 @@ class Solution {
         Map<Integer, Integer> numsMap = new HashMap<>();
         int ansCount = 0;
 
+        int target = 0;
+        int target1 = 0;
+
         for(int i = 0; i < nums.length; i++) {
-            int target = nums[i] + k;
-            int target1 =  nums[i] - k; // A - B = C / A = C + B / B = A - C
+            target = nums[i] + k;
+            target1 =  nums[i] - k; // A - B = C / A = C + B / B = A - C
 
             if(numsMap.containsKey(target)) {
                 ansCount += numsMap.get(target);
