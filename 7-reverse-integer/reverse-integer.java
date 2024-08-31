@@ -1,31 +1,19 @@
 class Solution {
     public int reverse(int x) {
 
-        boolean pos = x >= 0 ? true : false;
+        long finalNum = 0;
 
-        long num = Math.abs((long)x);
-
-        char[] arr = String.valueOf(num).toCharArray();
-
-        int l = 0;
-        int r = arr.length - 1;
-
-        while(l < r) {
-            char temp = arr[l];
-            arr[l] = arr[r];
-            arr[r] = temp;
-            l++;
-            r--;
+        while(x != 0) {
+            finalNum = (finalNum*10) + (x % 10);
+            x = x / 10;
         }
 
-        long finalNum = Long.valueOf(new String(arr));
 
-
-        if((pos && finalNum > Math.pow(2, 31) - 1) || (!pos && -1 * finalNum < Math.pow(-2, 31))) {
+        if(finalNum > Integer.MAX_VALUE || finalNum < Integer.MIN_VALUE) {
             return 0;
         }
 
-        return pos ? (int)finalNum : -1 * (int)finalNum;
+        return (int)finalNum;
         
     }
 }
