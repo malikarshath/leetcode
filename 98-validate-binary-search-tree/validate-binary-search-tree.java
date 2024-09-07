@@ -14,6 +14,7 @@
  * }
  */
 class Solution {
+
     public boolean isValidBST(TreeNode root) {
 
         if(root == null) {
@@ -27,49 +28,31 @@ class Solution {
         long leftLimit = Integer.MIN_VALUE;
         long rightLimit = Integer.MAX_VALUE;
 
-        Queue<Pair> q = new LinkedList<>();
 
-        Pair p = new Pair(leftLimit, rightLimit, root);
-        q.add(p);
-
-        while(!q.isEmpty()) {
-
-            int size = q.size();
-
-            for(int i = 1; i <= size; i++) {
-                Pair curr = q.poll();
-                long val = (long)curr.node.val;
-                long left = curr.left;
-                long right = curr.right;
-
-                if(val < left || val > right) {
-                    return false;
-                } 
-
-                if(curr.node.left != null) {
-                    q.add(new Pair(left, val - 1, curr.node.left));
-                }
-
-                if(curr.node.right != null) {
-                    q.add(new Pair(val + 1, right, curr.node.right));
-                }
-            }
-
-        }
-
-        return true;
+        return isBST(root, leftLimit, rightLimit);
 
 
     }
 
-    class Pair {
-        long left, right;
-        TreeNode node;
-
-        Pair(long l, long r, TreeNode n) {
-            this.left = l;
-            this.right = r;
-            this.node = n;
+    public boolean isBST(TreeNode A, long left, long right) {
+        if(A == null) {
+            return true;
         }
+
+        long val = (long)A.val;
+        if(val < left || val > right) {
+            return false;
+        }
+
+
+        boolean l = isBST(A.left, left, val - 1);
+        if(l == false) {
+            return false;
+        }
+        boolean r = isBST(A.right, val + 1, right);
+
+        return l && r;
     }
+
+    
 }
