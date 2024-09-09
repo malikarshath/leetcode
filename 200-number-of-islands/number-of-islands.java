@@ -6,14 +6,12 @@ class Solution {
         int n = grid.length;
         int m = grid[0].length;
 
-        int[][] visited = new int[n][m];
-
         int islands = 0;
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
-                if(visited[i][j] == 0 && grid[i][j] == '1') {
-                    dfs(i,j, grid, visited);
+                if(grid[i][j] == '1') {
+                    dfs(i,j, grid);
                     islands++;
                 }
             }
@@ -22,19 +20,19 @@ class Solution {
         return islands;
     }
 
-    public void dfs(int i, int j, char[][] grid, int[][] visited) {
+    public void dfs(int i, int j, char[][] grid) {
 
         int n = grid.length;
         int m = grid[0].length;
 
-        visited[i][j] = 1;
+        grid[i][j] = '0';
 
         for(int k = 0; k < 4; k++) {
             int row = i + rows[k];
             int col = j + cols[k];
 
-            if(row >= 0 && row < n && col >= 0 && col < m && visited[row][col] == 0 && grid[row][col] == '1') {
-                dfs(row, col, grid, visited);
+            if(row >= 0 && row < n && col >= 0 && col < m && grid[row][col] == '1') {
+                dfs(row, col, grid);
             }
         }
     }
