@@ -5,28 +5,23 @@ class Solution {
             return nums[0];
         }
 
-        int i = 0;
-        int j = nums.length - 1;
+        int s = 0;
+        int e = nums.length - 1;
 
-        int ans = Integer.MAX_VALUE;
+        int ans = 0;
 
-        while(i < j) {
-            if(nums[i] < nums[j]) { // Array is sorted return the min
-                return nums[i];
-            }
+        while(s <= e) {
+           int m = (e - s) / 2 + s;
 
-            int mid = (i + j) / 2;
-
-            ans = Math.min(ans, nums[j]);
-
-            if(nums[i] < nums[mid]) {
-                i = mid + 1;
-            } else {
-                j = mid;
-            }
+           if(nums[m] >= nums[0]) {
+                s = m + 1;
+           } else {
+                ans = m;
+                e = m - 1;
+           }
         }
 
-        return ans;
+        return nums[ans];
         
     }
 }
