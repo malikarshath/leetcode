@@ -2,19 +2,15 @@ class Solution {
     public int maxDistance(int[] position, int m) {
 
         Arrays.sort(position);
+        int n = position.length;
         
         int min = Integer.MAX_VALUE;
 
-        int minVal = position[0];
-        int maxVal = position[0];
-
         for(int i = 1; i < position.length; i++) {
             min = Math.min(min, Math.abs(position[i] - position[i - 1]));
-            minVal = Math.min(minVal, position[i]);
-            maxVal = Math.max(maxVal, position[i]);
         }
 
-        int max = maxVal - minVal;
+        int max = position[n - 1] - position[0];
 
         int s = min;
         int e = max;
