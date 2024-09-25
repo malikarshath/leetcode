@@ -6,14 +6,13 @@ class Solution {
         int right = 0;
 
         for(int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
 
-            if(ch == '(') {
-                if(left >= right && right != 0) {
+            if(s.charAt(i) == '(') {
+                if(left >= right && right != 0) { // (()
                     left--;
                     right--;
                     insertionCount++;
-                } else if(right == 1 && left  == 0) {
+                } else if(right == 1 && left  == 0) { // )
                     insertionCount += 2;
                     right--;
                 }
@@ -21,10 +20,10 @@ class Solution {
             } else {
                right++;
                if(right > 1) {
-                if(left == 0 && right == 2) {
+                if(left == 0 && right == 2) { // ))
                     right -= 2;
                     insertionCount++;
-                } else {
+                } else { // ())
                     left--;
                     right -= 2;
                 }
@@ -33,11 +32,9 @@ class Solution {
             }
         }
 
-        if(left == right && left != 0) {
-            insertionCount++;
-        } else if(left > right) {
+        if(left >= right) { // ((())  ()
             insertionCount += (left * 2) - right;
-        } else if(right == 1 && left  == 0) {
+        } else if(right == 1 && left  == 0) { // )
             insertionCount += 2;
         }
 
