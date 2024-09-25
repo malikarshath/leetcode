@@ -1,43 +1,44 @@
 class Solution {
     public int minInsertions(String s) {
-        
-        Stack<Character> st = new Stack<>();
 
         int insertionCount = 0;
+        int left = 0;
+        int right = 0;
 
         for(int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
 
             if(ch == '(') {
-                if(!st.isEmpty() && st.peek() == ')') {
-                    st.pop();
-                    st.pop();
+                if(left >= right && right != 0) {
+                    left--;
+                    right--;
                     insertionCount++;
-                }  
-                st.add(ch);
+                } else if(right == 1 && left  == 0) {
+                    insertionCount += 2;
+                    right--;
+                }
+                left++;
             } else {
-                if(st.isEmpty()) {
-                    st.add('(');
+               right++;
+               if(right > 1) {
+                if(left == 0 && right == 2) {
+                    right -= 2;
                     insertionCount++;
-                }
-                if(st.peek() == ')') {
-                    st.pop();
-                    if(!st.isEmpty()) {
-                        st.pop();
-                    }
                 } else {
-                    st.add(ch);
+                    left--;
+                    right -= 2;
                 }
+               }
+
             }
         }
-        while(!st.isEmpty()) {
-            char ch = st.pop();
-            if(ch == '(') {
-                insertionCount += 2;
-            } else {
-                insertionCount++;
-                st.pop();
-            }
+
+        if(left == right && left != 0) {
+            insertionCount++;
+        } else if(left > right) {
+            insertionCount += (left * 2) - right;
+        } else if(right == 1 && left  == 0) {
+            insertionCount += 2;
         }
 
 
