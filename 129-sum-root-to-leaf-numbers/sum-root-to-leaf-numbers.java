@@ -20,21 +20,20 @@ class Solution {
             return 0;
         }
         finalAns = 0;
-        sumNumbers(root, "");
+        sumNumbers(root,0);
         return finalAns;
     }
 
-    public void sumNumbers(TreeNode root, String str) {
+    public void sumNumbers(TreeNode root, int num) {
         if(root == null) {
             return;
         }
         if(root.left == null && root.right == null) {
-            String finalStr = str + String.valueOf(root.val);
-            finalAns += Integer.valueOf(finalStr);
+            finalAns += (num * 10) + root.val;
             return;
         }
 
-        String currVal = str + String.valueOf(root.val);
+        int currVal = num * 10 + root.val;
 
         sumNumbers(root.left, currVal);
         sumNumbers(root.right, currVal);
