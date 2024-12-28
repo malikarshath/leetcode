@@ -1,45 +1,36 @@
 class Solution {
     public int longestConsecutive(int[] nums) {
         
-
-        Map<Integer, Pair> mp = new HashMap<>();
+        Map<Integer, Pair> freqMap = new HashMap<>();
+        int maxLength = 0;
         for(int num : nums) {
-            if(mp.containsKey(num)) {
-                Pair curr = mp.get(num);
-                Pair newPair = new Pair(num + 1, curr.freq + 1);
-            } else {
-                mp.put(num, new Pair(num + 1, 1));
-            }
+            freqMap.put(num, new Pair(num + 1, 1));
         }
 
-        int max = 0;
-
-        for(int num : nums) {
-
+        for(Integer key: freqMap.keySet()) {
             int length = 0;
-            int key = num;
-            if(!mp.containsKey(key - 1)) {
-                while(mp.containsKey(key)) {
-                    Pair curr = mp.get(key);
-                    int freq = curr.freq;
-                    int nextNum = curr.nextNum;
-                    length += freq;
-                    key = nextNum;
+            if(!freqMap.containsKey(key - 1)) {
+                int currKey = key;
+                while(freqMap.containsKey(currKey)) {
+                    Pair currPair = freqMap.get(currKey);
+                    currKey = currPair.key;
+                    length += currPair.freq;
                 }
             }
-            
-            max = Math.max(max, length);
+
+            maxLength = Math.max(maxLength, length);
+
         }
 
-        return max;
+        return maxLength;
     }
 
-    class Pair {
-        int nextNum , freq;
+    public class Pair {
+        int key, freq;
 
-        Pair(int n, int f) {
-            this.nextNum = n;
-            this.freq = f;
+        Pair(int key, int freq) {
+            this.key = key;
+            this.freq = freq;
         }
     }
 }
