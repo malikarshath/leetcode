@@ -1,29 +1,24 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
+        int[][] ans = new int[k][2];
         
         Arrays.sort(points, (first, second) -> {
-            long f1 = first[0];
-            long f2 = first[1];
-            long s1 = second[0];
-            long s2 = second[1];
-
-            long firstpoint = (f1 * f1) + (f2 * f2);
-            long secondpoint = (s1 * s1) + (s2 * s2);
-
-            if(firstpoint < secondpoint) {
+            int f = first[0] * first[0] + first[1] * first[1];
+            int s = second[0] * second[0] + second[1] * second[1];
+            if(f < s) {
                 return -1;
-            } else if(secondpoint < firstpoint) {
+            } else if(f > s) {
                 return 1;
             }
             return 0;
         });
 
-        int[][] ans = new int[k][2];
-
         for(int i = 0; i < k; i++) {
-            ans[i] = points[i];
+            ans[i][0] = points[i][0];
+            ans[i][1] = points[i][1];
         }
-
         return ans;
+
+
     }
 }
