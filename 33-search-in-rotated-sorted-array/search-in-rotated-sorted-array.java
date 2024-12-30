@@ -22,10 +22,10 @@ class Solution {
                 if(nums[m] < nums[0]) { // mid in part 2
                     e = m - 1;
                 } else { // mid and target in part 1
-                    if(nums[m] >= target) {
-                        e = m - 1;
-                    } else {
+                    if(target >= nums[m]) {
                         s = m + 1;
+                    } else {
+                        e = m - 1;
                     }
                 }
             }
